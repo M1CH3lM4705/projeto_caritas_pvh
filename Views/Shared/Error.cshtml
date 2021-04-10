@@ -1,0 +1,18 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Erro";
+}
+
+<h1 class="text-danger">Erro.</h1>
+<h2 class="text-danger">Ocorreu um erro ao processar sua solicitação.</h2>
+<br />
+<button onclick="goBack()" class="btn btn-lg btn-dark">Voltar</button>
+
+@section Scripts{
+    <script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
+    }

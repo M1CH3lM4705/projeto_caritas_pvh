@@ -1,0 +1,256 @@
+﻿
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+.hide{
+    display:none;
+}
+/*Teste
+.un a:after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: rgba(128,128,128, 0.2);
+    transition: 400ms;
+}
+
+.un:hover a:after {
+    width: 100%;
+}
+*/
+.loaderbody{
+    width: 100%;
+    height: 100%;
+    left:0px;
+    top:0px;
+    position: absolute;
+    background-color:rgba(128,128,128, 0.2);
+    z-index: 2147483647;
+}
+
+.loader{
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius:50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 45%;
+    left: 40%;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        top: 5rem;
+    }
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+    .sidebar .nav-link .feather {
+        margin-right: 4px;
+        color: #999;
+    }
+
+    .sidebar .nav-link.active {
+        color: #007bff;
+    }
+
+        .sidebar .nav-link:hover .feather,
+        .sidebar .nav-link.active .feather {
+            color: inherit;
+        }
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .navbar-toggler {
+    top: .25rem;
+    right: 1rem;
+}
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+/*#table_grid > thead > tr th:nth-child(2){
+    width:110px;
+}*/
+
+#table_grid > thead > tr th:nth-child(4) {
+    width:220px;
+}
+
+#table_grid thead tr th span{
+    cursor:pointer;
+}
+
+
+h5.tituloCard{
+    padding-right:50px;
+}
+#container_div{
+    width:100%;
+    margin: 0 auto;
+}
+#cabecalho, .cabecalho>div.form-group{
+    border-bottom: 1px #dddddd solid;
+}
+#conteudo{
+    margin-top: 20px;
+    
+}
+#cabecelho_grid, .cabecalho_grid {
+    margin-bottom: 20px;
+    font-weight:400;
+    
+}
+.conteudo{
+    margin-top:20px;
+}
+.mensagem {
+    height:100px;
+    text-align:center;
+    border:1px solid #dddddd;
+    line-height:100px;
+}
+.form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+form{
+    letter-spacing:1px;
+}
+
+.footer {
+    padding: 4rem 0;
+    background: #183661;
+    font-size: 14px;
+    color: #fff;
+}
+
+    .footer .footer-heading {
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+
+        .footer .footer-heading span {
+            border-bottom: 3px solid #fff;
+        }
+
+    .footer a:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    .footer .copyright {
+        color: #fff;
+        padding-top: 7rem;
+        text-align: center;
+    }
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}

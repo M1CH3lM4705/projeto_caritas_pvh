@@ -1,0 +1,267 @@
+﻿@model ProjetoBetaAutenticacao.Models.PessoaCarente
+
+@{
+    ViewBag.Title = "Detalhes da Pesssoa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="container_div">
+    <section>
+        <h2>@ViewBag.Title</h2>
+    </section>
+    <section class="text-right">
+        <a href="@Url.Action("Index", "Encaminhamento", new { id = Model.PessoaCarenteId })" class="text-decoration-none">Encaminhamento</a>
+    </section>
+    <section>
+        <div class="card">
+            <h5 class="card-header"></h5>
+            <div class="card-body">
+                <h5 class="card-title .tituloCard">Dados pessoais</h5>
+                @*<div class="row">
+                    <div class="col-md-2">
+                        @Html.DisplayNameFor(model => model.Voluntario.UserName)
+                    </div>
+                    <div class="col-mde-8">
+                        @Html.DisplayFor(model => model.Voluntario.UserName)
+
+                    </div>
+                </div>*@
+                <div class="row cabecalho_grid">
+
+                    <div class="form-row col-sm-12">
+                        NOME:
+
+                        <div class="col-md-8">
+                            @Html.DisplayFor(model => model.Nome)
+                        </div>
+                    </div>
+                </div>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+                    <div class="form-group col-sm-4">
+
+                        @Html.DisplayNameFor(model => model.DataNascimento):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.DataNascimento)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+
+                        @Html.DisplayNameFor(model => model.Genero):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Genero)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.EstadoCivil):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.EstadoCivil)
+                        </div>
+                    </div>
+                </div>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.Cpf):
+
+                        <div class="col-md">
+                            @Html.DisplayFor(model => model.Cpf)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+
+                        @Html.DisplayNameFor(model => model.Rg):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Rg)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.ProtocoloRefugio):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.ProtocoloRefugio)
+                        </div>
+                    </div>
+                </div>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Nacionalidade):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Nacionalidade)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Profissao):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Profissao)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Renda):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Renda)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Religiao):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Religiao)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.Contato.Celular):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Contato.Celular).ToString().Replace("?", String.Empty)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.Contato.WhatsApp):
+
+                        <div class="col">
+                            @(Model.Contato.WhatsApp == true ? "Sim" : "Não")
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.Beneficio.TipoBeneficio):
+
+                        <div class="col">
+                            @if (Model.Beneficio.SimNao == true)
+                            {
+                                @Html.DisplayFor(model => model.Beneficio.TipoBeneficio)
+
+                            }
+                            else
+                            {
+                                <p>Não Recebe Beneficio</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h5 class="card-header"></h5>
+            <div class="card-body">
+                <h5 class="card-title .tituloCard">Endereço</h5>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Endereco.Rua):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Endereco.Rua)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Endereco.Numero):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Endereco.Numero)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Endereco.Bairro):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Endereco.Bairro)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        @Html.DisplayNameFor(model => model.Endereco.Cep):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.Endereco.Cep)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h5 class="card-header"></h5>
+            <div class="card-body">
+                <h5 class="card-title .tituloCard">Perfil Socioeconômico</h5>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+                    <div class="form-group col-sm-4">
+                        @Html.DisplayNameFor(model => model.PerfilEconomico.Escolaridade):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.PerfilEconomico.Escolaridade).ToString().Replace("_", " ")
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-8">
+                        @Html.DisplayNameFor(model => model.PerfilEconomico.OcupacaoAtual):
+
+                        <div class="col">
+                            @Html.DisplayFor(model => model.PerfilEconomico.OcupacaoAtual)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h5 class="card-header"></h5>
+            <div class="card-body">
+                <h5 class="card-title .tituloCard">Membros Familiares</h5>
+                <div class="row cabecalho_grid d-flex justify-content-between">
+                    @foreach (var item in Model.MembroFamilia)
+                    {
+                        <div class="form-group col-sm-3">
+                            @Html.DisplayNameFor(model => item.Nome):
+
+                            <div class="col">
+                                @Html.DisplayFor(model => item.Nome)
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            @Html.DisplayNameFor(model => item.Cpf):
+
+                            <div class="col">
+                                @Html.DisplayFor(model => item.Cpf)
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            @Html.DisplayNameFor(model => item.Rg):
+
+                            <div class="col">
+                                @Html.DisplayFor(model => item.Rg)
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            @Html.DisplayNameFor(model => item.Parentesco):
+
+                            <div class="col">
+                                @Html.DisplayFor(model => item.Parentesco)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr />
+</div>
+<p>
+    
+    @Html.ActionLink("Voltar à Lista", "Index",null, new { @class = "text-decoration-none" })
+</p>

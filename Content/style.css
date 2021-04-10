@@ -1,0 +1,58 @@
+﻿#telalogin {
+    width: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*box-shadow: 1px 5px 30px rgb(195, 195, 195);*/
+}
+.Erros {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body{
+    margin:0;
+    --nav-load-time: 300ms;
+    --nav-link-load-time: 500ms;
+    --article-load-time: 200ms;
+    --article-load-delay:calc(var(--nav-load-time) + var(--nav-link-load-time));
+    --article-load-delay2:calc(var(--article-load-delay) + var(--article-load-time));
+}
+
+a{
+    color: inherit;
+    text-decoration:none;
+
+}
+
+main{
+    padding: 30px;
+}
+
+h1{
+    animation: article-load 300ms ease-in var(--article-load-delay);
+    animation-fill-mode:forwards;
+    transform:translateX(-20px);
+    opacity:0;
+}
+
+p, h2 {
+    animation: article-load 300ms ease-in var(--article-load-delay2);
+    animation-fill-mode: forwards;
+    transform: translateX(-20px);
+    opacity: 0;
+}
+
+@keyframes article-load{
+    0%{
+        transform:translateY(-20px);
+        opacity:0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ProjetoBetaAutenticacao.Areas.Admin.Data.Voluntario>
+
+@{
+    ViewBag.Title = "Lista de Agentes Caritas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+}
+
+<div id="container_div">
+    <section id="cabecalho">
+        <h2>@ViewBag.Title</h2>
+    </section>
+
+    <section id="conteudo">
+        <div id="cabecelho_grid" class="row">
+            <div class="col-md-6">
+                <a href="#" class="btn btn-primary btnVoluntario" title="Cadastrar Agente Caritas"><i class="bi bi-plus"></i>Novo</a>
+                @Html.DropDownList("tamanhoPag", (SelectList)ViewBag.ListaTamanhoPag, new { @class = "selectpicker" })
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row ">
+                    <div class="col-md-4">
+                        <label class="col-form-label" for="pesquisa">Digite um Nome</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBox("pesquisa", null, "", htmlAttributes: new { @class = "form-control mb-2", @placeholder = "(Ex: João)" })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="lista" class="col col-md-12">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @Html.Partial("_ListaVoluntario", Model)
+                }
+                else
+                {
+                    <div class="mensagem">
+                        Não tem registro em @ViewBag.Title
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/Voluntario/VoluntarioJS.js"></script>
+    <script language="javascript" type="text/javascript">
+        var url_index = "/Admin/Voluntarios/Index";
+        var viewBagPagina = '@ViewBag.Pagina';
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@model PagedList.IPagedList<ProjetoBetaAutenticacao.Models.PessoaCarente>
+@using PagedList.Mvc
+
+@Styles.Render("~/Content/PagedList.css")
+
+<div id="content" class="table-responsive ">
+    <table id="table_grid" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col"><span class="coluna-ordenacao" data-campo="Nome">Nome</span></th>
+                <th scope="col">Agente Caritas</th>
+                <th scope="col">Paroquia</th>
+                <th scope="col">Acão</th>
+            </tr>
+        </thead>
+        <tbody id="tbody_grid">
+            @foreach (var item in Model)
+            {
+
+                <tr data-id="@item.PessoaCarenteId">
+                    <td>
+
+                        <a href="@Url.Action("DetalhesPesssoa","PessoaCarente", new { @id = item.PessoaCarenteId })" title="Clique, para inserir um encaminhamento">@item.Nome</a>
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(m => item.Voluntario.Nome)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(m => item.Voluntario.Paroquia.Nome)
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-warning btnAlterarPessoa" title="Alterar Pessoa"><i class="bi bi-pencil-square"></i>Alterar</a>
+                        <a href="#" class="btn btn-danger btnExcluirPessoa" title="Excluir Pessoa"><i class="bi bi-trash"></i> Excluir</a>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+    </table>
+    <br />
+    Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    <div id="contentPager">
+        @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, pesquisa = ViewBag.Pesquisa, 
+       tamanhoPag = ViewBag.TamanhoPagina@*, ordem = ViewBag.Ordem*@ }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+                {
+                HttpMethod = "GET",
+                UpdateTargetId = "tbody_grid",
+                OnSuccess = "onAjaxSuccess",
+                OnFailure = "onAjaxFailure"
+            }))
+    </div>
+</div>
+
+
