@@ -212,6 +212,33 @@ $(document).ready(function () {
         }
     });
 });
+//    .on('click', '.link', function (e) {
+//    e.preventDefault();
+//    var paginaRef = $(this).attr('href');
+
+//    chamarPage(paginaRef);
+//});
+
+function chamarPage(pagRef) {
+
+    data = { 'tamanhoPag': 5, 'pagina': 1, 'pesquisa': '' };
+
+    $.ajax({
+        url: pagRef,
+        type: "GET",
+        data:data,
+        dataType: "html",
+        cache: false,
+        async: true,
+
+        success: function (response) {
+            $('.container_div').html(response);
+        },
+        error: function (error) {
+            console.log('A Pagina não foi carregada', error);
+        }
+    })
+}
 
 function obter_ordem_grid() {
     var colunas_grid = $('.coluna-ordenacao'),

@@ -60,7 +60,7 @@
                                 </a>
                                 <ul id="link-toggle" class="nav flex-column" style="display:none;">
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="@Url.Action("Index", "Gerenciar", new { area = "" })"><i class="bi bi-gear"></i> Configurações</a>
+                                        <a class="dropdown-item link" href="@Url.Action("Index", "Gerenciar", new { area = "" })"><i class="bi bi-gear"></i> Configurações</a>
                                     </li>
                                 </ul>
                             </li>
@@ -76,63 +76,20 @@
                                     ADMIN
                                 </a>
                                 <div class="dropdown_menu" aria-labelledby="dropdownAdmin" style="display:none;">
-                                    <a class=" dropdown-item" href="@Url.Action("Index", "Voluntarios", new { area = "Admin" })">Agente Caritas</a>
-                                    <a class=" dropdown-item" href="@Url.Action("Index", "Paroquias", new { area = "Admin" })">Paróquia</a>
+                                    <a class=" dropdown-item link" href="@Url.Action("Index", "Voluntarios", new { area = "Admin" })">Agente Caritas</a>
+                                    <a class=" dropdown-item link" href="@Url.Action("Index", "Paroquias", new { area = "Admin" })">Paróquia</a>
                                 </div>
                             </li>
                         }
                         <li class="nav-item un">
-                            <a class="nav-link" href="@Url.Action("Index", "PessoaCarente", new { area = "" })" title="Pessoas Carentes">
+                            <a class="nav-link link" href="@Url.Action("Index", "PessoaCarente", new { area = "" })" title="Pessoas Carentes">
                                 <i class="bi bi-people"></i>
                                 Pessoas
                             </a>
                         </li>
-                        @*<li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="bar-chart-2"></span>
-                                    Reports
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="layers"></span>
-                                    Integrations
-                                </a>
-                            </li>*@
                     </ul>
 
-                    @*<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                            <span>Saved reports</span>
-                            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                                <span data-feather="plus-circle"></span>
-                            </a>
-                        </h6>*@
-                    @*<ul class="nav flex-column mb-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Current month
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Last quarter
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Social engagement
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span data-feather="file-text"></span>
-                                    Year-end sale
-                                </a>
-                            </li>
-                        </ul>*@
+                    
                 </div>
             </nav>
 
@@ -144,16 +101,6 @@
                             @User.Identity.GetParoquia()
                         }
                     </h5>
-                    @*<div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group mr-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                                <span data-feather="calendar"></span>
-                                This week
-                            </button>
-                        </div>*@
                 </div>
 
                 <div class="container body-content">
@@ -163,6 +110,9 @@
                         </div>
                     </div>
                     @RenderBody()
+                    <div id="loaderbody" class="loaderbody hide">
+                        <div class="loader"></div>
+                    </div>
                 </div>
 
 
@@ -187,9 +137,7 @@
             </div>
         </div>
     </div>
-    <div id="loaderbody" class="loaderbody hide">
-        <div class="loader"></div>
-    </div>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
