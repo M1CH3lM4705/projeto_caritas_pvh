@@ -106,6 +106,7 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
             var resultado = "OK";
             var mensagens = new List<string>();
             var idSalvo = string.Empty;
+            var cidade = string.Empty;
             if (db.Voluntarios.Any(p => p.UserName == voluntario.UserName))
             {
                 ModelState.AddModelError("UserName", $"{voluntario.UserName} Ja cadastrado!");
@@ -135,7 +136,10 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                         existeVol = voluntario;
                         db.Voluntarios.Add(existeVol);
                         var par = db.Paroquias.Find(existeVol.ParoquiaId);
-                        Utils.CreateUserASP(existeVol.UserName, par.Nome);
+                        var idCidade = par.Cidade;
+                        Municipio municipio = new Municipio();
+                        cidade = municipio.BuscarCidade(idCidade).Nome;
+                        Utils.CreateUser(existeVol.UserName, par.Nome, cidade);
                         Utils.AddRoleToUser(existeVol.UserName, existeVol.Role);
                     }
                     else
@@ -163,12 +167,12 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                             if (oldUser != null && oldUser.UserName != voluntario.UserName && oldUser.ParoquiaId != voluntario.ParoquiaId)
                             {
                                 //Verifica se usuario é diferente e, se paroquia também, para então alterar o nome da paroquia na tabela aspNetUsers
-                                Utils.ChangeUserParoquia(voluntario.UserName, par.Nome);
+                                Utils.ChangeUserParoquia(voluntario.UserName, par.Nome, cidade);
                             }
                             if (oldUser != null && oldUser.UserName == voluntario.UserName && oldUser.ParoquiaId != voluntario.ParoquiaId)
                             {
                                 //Verifica se usuario é igual e, se paroquia e diferente, para então alterar o nome da paroquia na tabela aspNetUsers
-                                Utils.ChangeUserParoquia(oldUser.UserName, par.Nome);
+                                Utils.ChangeUserParoquia(oldUser.UserName, par.Nome, par.Cidade);
                             }
                             if (oldUser != null && oldUser != null && oldUser.UserName != voluntario.UserName && oldUser.Role != voluntario.Role)
                             {
@@ -206,6 +210,7 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                 var db2 = new CaritasContext();
                 var oldUser = db2.Voluntarios.Find(voluntario.VoluntarioId);
                 var par = db2.Paroquias.Find(voluntario.ParoquiaId);
+                
                 //oldUser.Paroquia = par;
 
                 db2.Dispose();
@@ -221,12 +226,12 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                     if (oldUser != null && oldUser.UserName != voluntario.UserName && oldUser.ParoquiaId != voluntario.ParoquiaId)
                     {
                         //Verifica se usuario é diferente e, se paroquia também, para então alterar o nome da paroquia na tabela aspNetUsers
-                        Utils.ChangeUserParoquia(voluntario.UserName, par.Nome);
+                        Utils.ChangeUserParoquia(voluntario.UserName, par.Nome, par.Cidade);
                     }
                     if (oldUser != null && oldUser.UserName == voluntario.UserName && oldUser.ParoquiaId != voluntario.ParoquiaId)
                     {
                         //Verifica se usuario é igual e, se paroquia e diferente, para então alterar o nome da paroquia na tabela aspNetUsers
-                        Utils.ChangeUserParoquia(oldUser.UserName, par.Nome);
+                        Utils.ChangeUserParoquia(oldUser.UserName, par.Nome, par.Cidade);
                     }
                     if (oldUser != null && oldUser != null && oldUser.UserName != voluntario.UserName && oldUser.Role != voluntario.Role)
                     {

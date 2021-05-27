@@ -1,0 +1,95 @@
+﻿@model ProjetoBetaAutenticacao.Models.LoginViewModel
+
+@{
+    Layout = null;
+
+}
+
+
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="~/Content/img/favicon.ico" type="image/x-icon" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <title>Página de Login</title>
+</head>
+<body>
+
+    <section id="telalogin">
+
+        <div class="card shadow p-3 mb-5 bg-white rounded" id="">
+            <div class="text-center my-3">
+                <img src="~/Content/img/logo-caritas.png" alt="Image" style="width:100px;height:80px" class="card-img-top">
+            </div>
+            <div class="card-body ">
+                @using (Html.BeginForm("Login", "Autenticacao", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "formDados" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <label>Login </label>
+                        <input type="text" class="form-control" id="UserName" name="UserName" aria-describedby="emailHelp" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" class="form-control" id="Password" name="Password" required>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe">
+                        <label class="form-check-label" for="">Lembrar-Me</label>
+                    </div>
+                    <input type="submit" id="btnLogar" class="btn btn-primary btn-block" value="Entrar">
+                    <br />
+                    <div>
+                        <p>&copy;@DateTime.Now.Year Direitos - Michel Matos | Jorhana Freitas | Gezineia Costa - Analistas de Sistemas</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <div id="loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78" />
+        </svg>
+    </div>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c26cd2166c.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#UserName").focus();
+
+            var loader = function () {
+                setTimeout(function () {
+                    if ($('#loader').length > 0) {
+                        $('#loader').removeClass('show');
+                    }
+                }, 1);
+            };
+            loader();
+        });
+        var formId = document.getElementById("formDados");
+        var send = $("#btnLogar");
+        $(formId).submit(function (event) {
+            if (formId.checkValidity()) {
+                send.attr('disabled', 'disabled');
+                send.val("Comunicando...");
+            }
+        });
+    </script>
+</body>
+</html>
+

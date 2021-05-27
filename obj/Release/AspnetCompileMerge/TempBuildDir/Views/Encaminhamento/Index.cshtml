@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ProjetoBetaAutenticacao.Models.Encaminhamento>
+
+@{
+    ViewBag.Title = "Encaminhamentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+}
+
+<div id="container_div">
+    <section id="cabecalho">
+        <h2 style="margin-bottom:40px;">@ViewBag.Title</h2>
+    </section>
+    <section class="conteudo">
+        <div class="row cabecalho_grid">
+            <div class="col-md-8">
+                <h4>@ViewBag.Nome</h4>
+
+            </div>
+            @if (ViewBag.Data != null)
+            {
+                <div id="dataEntrega" class="col col-md-4 text-right">
+                    <h5>Data da proxima entrega: </h5>
+                    <p class="h3"><i class="bi bi-calendar-date" style="margin-right:2.3rem;"></i> @ViewBag.Data</p>
+                </div>
+            }
+        </div>
+    </section>
+    <section class="conteudo">
+        <div class="row cabecalho_grid">
+
+            <div class="col-md">
+                <a href="#" class="btn btn-primary btn-lg my-1 justify-content-center" id="btnEncNovo" title="Inserir Encaminhamento">Novo Encaminhamento</a>
+                @Html.DropDownList("tamanhoPage", (SelectList)ViewBag.ListaTamanhoPag, new { @class = "selectpicker" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="divEncaminhar">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @Html.Partial("_ListaEncaminhamentos", Model)
+                }
+                else
+                {
+                    <div id="mensagem" class="mensagem">
+                        Não tem registro em @ViewBag.Title
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <input hidden id="pessoaId" data-id="@ViewBag.Id" />
+
+</div>
+
+
+
+
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/PessoaJs/encaminhamento.js"></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        var url_novo_enc = '@Url.Action("ModalEncaminhamento", "Encaminhamento")';
+        var url_alterar_enc = '@Url.Action("Alterar", "Encaminhamento")';
+        var url_lista_paginacao = '@Url.Action("ListaEncaminhamento","Encaminhamento")';
+        var viewBagPagina = '@ViewBag.Pagina';
+    </script>
+}

@@ -26,6 +26,13 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Data
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
 
+        [Required(ErrorMessage = "O Campo {0} é obrigatorio!")]
+        public Estado Estado { get; set; }
+
+        [StringLength(200)]
+        [Required(ErrorMessage = "O Campo {0} é obrigatorio!")]
+        public string Cidade { get; set; }
+
         public virtual ICollection<Voluntario> Voluntarios { get; set; }
 
     }

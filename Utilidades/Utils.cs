@@ -36,7 +36,7 @@ namespace ProjetoBetaAutenticacao.Utilidades
             userManager.Update(userASP);
         }
 
-        public static void ChangeUserParoquia(string userName, string newParoquia)
+        public static void ChangeUserParoquia(string userName, string newParoquia, string cidade)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
             var userASP = userManager.FindByName(userName);
@@ -47,7 +47,19 @@ namespace ProjetoBetaAutenticacao.Utilidades
             }
 
             userASP.Paroquia = newParoquia;
+            userASP.Cidade = cidade;
+            userManager.Update(userASP);
+        }
 
+        public static void AdicionarCidade(string userName, string cidade)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var userASP = userManager.FindByName(userName);
+            if(userASP == null)
+            {
+                return;
+            }
+            userASP.Cidade = cidade;
             userManager.Update(userASP);
         }
 
@@ -175,8 +187,25 @@ namespace ProjetoBetaAutenticacao.Utilidades
 
             userManager.Create(userASP, username);
         }
+        public static void CreateUserASP(string username, string roleName, string password)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
 
-        public static void CreateUserASP(string username, string paroquia)
+            var userASP = userManager.FindByName(username);
+            if (userASP == null)
+            {
+                userASP = new ApplicationUser
+                {
+                    UserName = username,
+                    Ativo = true
+                };
+
+                userManager.Create(userASP, password);
+                userManager.AddToRole(userASP.Id, roleName);
+            }
+        }
+
+        public static void CreateUser(string username, string paroquia, string cidade)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
 
@@ -184,8 +213,9 @@ namespace ProjetoBetaAutenticacao.Utilidades
             {
                 UserName = username,
                 Paroquia = paroquia,
+                Cidade = cidade,
                 Ativo = true,
-                Email = ($"{username}@{username}.com")
+                Email = ($"{username}@{username}.com").ToLower()
         };
 
             userManager.Create(userASP, username);
@@ -216,24 +246,6 @@ namespace ProjetoBetaAutenticacao.Utilidades
 
             userManager.RemoveFromRole(userASP.Id, oldRoleName);
             userManager.AddToRole(userASP.Id, newRoleName);
-        }
-
-        public static void CreateUserASP(string username, string roleName, string password)
-        {
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
-
-            var userASP = userManager.FindByName(username);
-            if (userASP == null)
-            {
-                userASP = new ApplicationUser
-                {
-                    UserName = username,
-                    Ativo = true
-                };
-
-                userManager.Create(userASP, password);
-                userManager.AddToRole(userASP.Id, roleName);
-            }
         }
 
         public static async Task SendMail(string to, string subject, string body)

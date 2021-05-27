@@ -1,0 +1,75 @@
+﻿@model PagedList.IPagedList<ProjetoBetaAutenticacao.Areas.Admin.Data.Voluntario>
+@using PagedList.Mvc
+
+@Styles.Render("~/Content/PagedList.css")
+
+<div id="content" class="table-responsive-sm">
+    <table id="table_grid" class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Paroquia.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Ativo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Role)
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody">
+            @foreach (var item in Model)
+            {
+            <tr data-id="@item.VoluntarioId">
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paroquia.Nome)
+                </td>
+                <td>
+                    @(item.Ativo == true? "Sim" : "Não")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <a class="btn btn-secondary btnAlterar" href="#" title="Alterar Agente Caritas"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn btn-secondary btnDetalhes" href="#" title="Visualizar Agente Caritas"><i class="bi bi-eye"></i></a>
+                    <a class="btn btn-secondary btnExcluir" href="#" title="Desativar/Ativar Agente Caritas"><i class="bi bi-trash"></i></a>
+                    <input type="checkbox" id="chkVol" @(item.Ativo==true?"checked":"") hidden />
+                    @*<div class="custom-control custom-switch">                        
+                        @Html.CheckBoxFor(modelItem => item.Ativo,
+                       new { @class = "custom-control-input btnExcluir", @title = "Desativar/Ativar Agente Caritas" })
+                    </div>*@
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+    <br />
+    Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    <div id="contentPager">
+        @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina, pesquisa = ViewBag.Pesquisa }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+                {
+                HttpMethod = "GET",
+                UpdateTargetId = "tbody",
+                OnSuccess = "onAjaxSuccess",
+                OnFailure = "onAjaxFailure"
+            }))
+    </div>
+</div>

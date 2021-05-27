@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/style.css" rel="stylesheet" />
+    <title>Acesso Negado</title>
+</head>
+<body>
+    <div class="container Erros">
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <h1>Acesso Negado!</h1>
+                <p>Voce não tem permissão para acessar essa área!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button onclick="goBack()" class="btn btn-lg btn-dark">Voltar</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
+</body>
+</html>

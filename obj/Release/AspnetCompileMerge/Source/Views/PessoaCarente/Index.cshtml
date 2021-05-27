@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ProjetoBetaAutenticacao.Models.PessoaCarente>
+@using Microsoft.AspNet.Identity;
+
+
+@{
+    ViewBag.Title = "Lista de Pessoas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+}
+<div id="container_div">
+    <section id="cabecalho">
+        <h2>@ViewBag.Title</h2>
+    </section>
+    <section id="conteudo">
+
+        <div id="cabecelho_grid" class="row">
+            <div class="col-md-6">
+                <a href="#"
+                   class="btn btn-primary btn-lg mb-2 btnCadastrarPessoa"><i class="bi bi-person-plus" style="font-size:1.5rem;"></i> Novo</a>
+                @Html.DropDownList("tamanhoPag", (SelectList)ViewBag.ListaTamanhoPag, new { @class = "selectpicker" })
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group row ">
+                    <div class="col-md-4">
+                        <label class="col-form-label" for="pesquisa">Digite um Nome</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBox("pesquisa", null, "", htmlAttributes: new { @class = "form-control mb-2", @placeholder = "(Ex: João)" })
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div id="lista" class="col-md-12">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @Html.Partial("_ListaPessoas", Model)
+                }
+                else
+                {
+                    <div id="mensagem" class="mensagem">
+                        Não tem registro em @ViewBag.Title
+                    </div>
+                }
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/PessoaJs/cadastro-pessoa.js"></script>
+    <script language="javascript" type="text/javascript">
+        var salvar_pessoa_url = '@Url.Action("SalvarPessoa", "PessoaCarente")';
+        var alterar_pessoa_url = '@Url.Action("AlterarPessoa","PessoaCarente")';
+        var modal_url = '@Url.Action("PessoaNovo", "PessoaCarente")';
+        var url_index = "/PessoaCarente/Index";
+        var namePessoa = '@User.Identity.Name';
+        var viewBagPagina = '@ViewBag.Pagina';
+    </script>
+
+}

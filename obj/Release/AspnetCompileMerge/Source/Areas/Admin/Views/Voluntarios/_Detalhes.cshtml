@@ -1,0 +1,58 @@
+﻿@model ProjetoBetaAutenticacao.Areas.Admin.Data.Voluntario
+
+@{
+    ViewBag.Title = "Detalhes Agente Caritas";
+    Layout = null;
+}
+
+
+<div>
+    
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Paroquia.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paroquia.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SobreNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SobreNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Alterar Senha","AlterarSenha", new { id = Model.VoluntarioId })
+</p>

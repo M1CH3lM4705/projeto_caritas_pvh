@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using PagedList;
 using ProjetoBetaAutenticacao.Areas.Admin.Data;
 using ProjetoBetaAutenticacao.Infraestrutura;
@@ -43,6 +45,7 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Detalhes(long? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -52,6 +55,9 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            var idM = paroquia.Cidade;
+            Municipio municipio = new Municipio();
+            paroquia.Cidade = municipio.BuscarCidade(idM).Nome;
             return PartialView("_Detalhes",paroquia);
         }
 
@@ -69,7 +75,9 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                 {
                     return HttpNotFound();
                 }
-
+                Municipio municipio = new Municipio();
+                var idM = paroquia.Cidade;
+                ViewBag.Cidade = municipio.BuscarCidade(idM);
             }
             
             return PartialView("_Create", paroquia);
@@ -85,10 +93,7 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
             var resultado = "OK";
             var mensagens = new List<string>();
             var idSalvo = string.Empty;
-            if (db.Paroquias.Any(p => p.Nome == paroquia.Nome))
-            {
-              ModelState.AddModelError("Nome", $"Paróquia {paroquia.Nome} Ja registrada!");
-            }
+            
             if (!ModelState.IsValid)
             {
                 resultado = "AVISO";
@@ -108,6 +113,10 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                         .FirstOrDefault();
                     if (existeParoquia == null)
                     {
+                        if (db.Paroquias.Any(p => p.Nome == paroquia.Nome))
+                        {
+                            ModelState.AddModelError("Nome", $"Paróquia {paroquia.Nome} Ja registrada!");
+                        }
                         existeParoquia = paroquia;
                         db.Paroquias.Add(existeParoquia);
                     }
@@ -116,6 +125,8 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
                         existeParoquia.ParoquiaId = paroquia.ParoquiaId;
                         existeParoquia.Nome = paroquia.Nome;
                         existeParoquia.Email = paroquia.Email;
+                        existeParoquia.Estado = paroquia.Estado;
+                        existeParoquia.Cidade = paroquia.Cidade;
                         db.Entry(existeParoquia).State = EntityState.Modified;
                     }
                     db.SaveChanges();
@@ -141,6 +152,15 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Controllers
             {
                 try
                 {
+                    //foreach(var v in paroquia.Voluntarios)
+                    //{
+                    //    if(v.ParoquiaId == paroquia.ParoquiaId)
+                    //    {
+                    //        v.Ativo = false;
+                    //        db.Voluntarios.Attach(v);
+                    //        db.Entry(v).Property(x => x.Ativo).IsModified = true;
+                    //    }
+                    //}
                     db.Paroquias.Remove(paroquia);
                     db.SaveChanges();
                     result = true;

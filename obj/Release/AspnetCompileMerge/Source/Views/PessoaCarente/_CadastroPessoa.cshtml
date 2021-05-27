@@ -1,0 +1,295 @@
+﻿@model ProjetoBetaAutenticacao.Models.PessoaCarente
+
+@{
+    Layout = null;
+
+    var Value = "";
+    if (Model.DataNascimento != DateTime.Parse("01/01/0001"))
+    {
+        Value = Model.DataNascimento.ToString("yyyy-MM-dd");
+
+    }
+
+}
+
+<div class="row">
+    <div class="col" id="mostrarForm">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.PessoaCarenteId)
+        @Html.HiddenFor(m => m.VoluntarioId)
+        @if (Model.PessoaCarenteId != 0)
+        {
+            @Html.HiddenFor(m => m.Contato.ContatoId)
+            @Html.HiddenFor(m => m.Beneficio.BeneficioId)
+            @Html.HiddenFor(m => m.Endereco.EnderecoId)
+            @Html.HiddenFor(m => m.PerfilEconomico.PSocioEcoId)
+        }
+        <div class="accordion" id="recolher">
+            <div class="card" style="cursor:pointer;">
+
+                <div class="card-header" id="recolher1">
+                    <h5 class="card-title">IDENTIFICAÇÃO</h5>
+                </div>
+                <div id="recolherUm" class="collapse show" aria-labelledby="recolher1" data-parent="#recolher">
+                    <div class="card-body card1" style="display:block;">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(m => m.Nome, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control", autofocus = true } })
+
+                                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.Nacionalidade, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Nacionalidade, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(m => m.Nacionalidade, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Genero" class="control-label ml-3">Sexo</label>
+                                <div class="form-check ">
+
+
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.Genero, "Masculino", htmlAttributes: new { @id = "Genero0", @class = "form-check-input" })
+                                        <label class="form-check-label" for="Genero0">Masculino</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.Genero, "Feminino", htmlAttributes: new { @id = "Genero1", @class = "form-check-input" })
+                                        <label class="col-form-label" for="Genero1">Feminino</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.Genero, "Outro", htmlAttributes: new { @id = "Genero2", @class = "form-check-input" })
+                                        <label class="col-form-label" for="Genero2">Outro</label>
+                                    </div>
+
+
+                                </div>
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Genero, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.Cpf, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Cpf, new { htmlAttributes = new { @class = "form-control cpf" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Cpf, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.Rg, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Rg, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Rg, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.DataNascimento, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.DataNascimento, new { htmlAttributes = new { @class = "form-control", @Value = Value, data_mask = "00/00/0000" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.DataNascimento, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.ProtocoloRefugio, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.ProtocoloRefugio, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.ProtocoloRefugio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.EstadoCivil, htmlAttributes: new { @class = "control-label" })
+                                @Html.EnumDropDownListFor(m => m.EstadoCivil, htmlAttributes: new { @class = "form-control" })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.EstadoCivil, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                @Html.LabelFor(m => m.Contato.Celular, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Contato.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Contato.Celular, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                @Html.LabelFor(m => m.Contato.WhatsApp, htmlAttributes: new { @class = "control-label ml-3" })
+                                <div class="form-check">
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.Contato.WhatsApp, false, htmlAttributes: new { @id = "Nao", @class = "form-check-input" })
+                                        <label class="col-form-label" for="Nao">Não</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.Contato.WhatsApp, true, htmlAttributes: new { @id = "Sim", @class = "form-check-input" })
+                                        <label class="col-form-label" for="Sim">Sim</label>
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        @Html.ValidationMessageFor(m => m.Contato.WhatsApp, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                @Html.LabelFor(m => m.Religiao, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Religiao, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Religiao, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                @Html.LabelFor(m => m.Profissao, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Profissao, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Profissao, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5 d-flex flex-column justify-content-end ">
+                                @Html.LabelFor(m => m.Renda, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Renda, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Renda, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="label-control">Recebe algum benefício do governo:</label>
+                                <select class="form-control" id="Beneficio.SimNao" name="Beneficio.SimNao" onchange="ativarInput();">
+                                    <option value="false" selected>NÃO</option>
+                                    <option value="true">SIM</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-6 py-2">
+                                <label class="label-control"></label>
+                                @Html.EditorFor(m => m.Beneficio.TipoBeneficio, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @placeholder = "Qual Benefício?" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Beneficio.TipoBeneficio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="cursor:pointer;">
+                <div class="card-header" id="recolher2">
+                    <h5 class="card-title">ENDEREÇO</h5>
+
+                </div>
+                <div id="recolherDois" class="collapse show" aria-labelledby="recolher2" data-parent="#recolher">
+                    <div class="card-body card2">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.Endereco.Cep, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Endereco.Cep, new { htmlAttributes = new { @class = "form-control cep" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Endereco.Cep, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.Endereco.Bairro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Endereco.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Endereco.Bairro, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("Logradouro", htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Endereco.Rua, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Endereco.Rua, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.Endereco.Numero, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(m => m.Endereco.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.Endereco.Numero, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="cursor:pointer;">
+                <div class="card-header" id="recolher3">
+                    <h5 class="card-title">PERFIL SOCIOECONÔMICO</h5>
+                </div>
+                <div id="recolherTres" class="collapse show" aria-labelledby="recolher3" data-parent="#recolher">
+                    <div class="card-body card3">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.PerfilEconomico.Escolaridade, htmlAttributes: new { @class = "control-label" })
+                                @Html.EnumDropDownListFor(m => m.PerfilEconomico.Escolaridade, htmlAttributes: new { @class = "form-control" })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.PerfilEconomico.Escolaridade, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="label-control">Ocupação Atual</label>
+                                <select class="form-control" id="OcupacaoAtual" name="PerfilEconomico.OcupacaoAtual" onchange="AtivarOcupacaoAtual()">
+                                    <option value="TRABALHO FORMAL">TRABALHO FORMAL</option>
+                                    <option value="TRABALHO INFORMAL">TRABALHO INFORMAL</option>
+                                    <option value="AUTÔNOMO">AUTÔNOMO</option>
+                                    <option value="ESTUDANTE">ESTUDANTE</option>
+                                    <option value="DESEMPREGADA(O)">DESEMPREGADA(O)</option>
+                                    <option value="">OUTROS</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-4 py-1">
+                                <label class="label-control"></label>
+                                @Html.EditorFor(m => m.PerfilEconomico.OcupacaoAtual, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @placeholder = "Qual a ocupação?" } })
+                                <div class="">
+                                    @Html.ValidationMessageFor(m => m.PerfilEconomico.OcupacaoAtual, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="cursor:pointer;">
+                <div class="card-header" id="recolher4">
+                    <h5 class="card-title">MEMBROS DA FAMÍLIA</h5>
+                </div>
+                <div id="recolherQuatro" class="collapse show" aria-labelledby="recolher4" data-parent="#recolher">
+                    <div class="card-body card4">
+                        <div class="form-row">
+                            <div class="form-group col-md-12" id="novoFamiliar">
+                                @if (Model != null && Model.MembroFamilia != null)
+                                {
+                                    foreach (var membro in Model.MembroFamilia)
+                                    {
+                                        Html.RenderPartial("~/Views/MembrosFamiliar/_MembroFamilia.cshtml", membro);
+                                    }
+                                }
+                            </div>
+
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <input type="button" id="addFamiliar" name="addFamiliar" value="Inserir outro membro familiar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

@@ -13,6 +13,10 @@ namespace ProjetoBetaAutenticacao.Models
     {
         public PessoaCarente()
         {
+            //Contato = new Contato();
+            //Endereco = new Endereco();
+            //Beneficio = new Beneficio();
+            //PerfilEconomico = new PerfilSocioEconomico();
             MembroFamilia = new List<MembroFamilia>();
             Encaminhamentos = new List<Encaminhamento>();
             DataCadastro = DateTime.Now;

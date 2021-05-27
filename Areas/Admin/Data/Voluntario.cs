@@ -18,7 +18,7 @@ namespace ProjetoBetaAutenticacao.Areas.Admin.Data
 
         [Display(Name = "Login")]
         [Required(ErrorMessage = "O Campo {0} é Obrigatório!")]
-        [StringLength(100, ErrorMessage = "O Campo {0} pode ter no máximo {1} e minimo {2} caracteres", MinimumLength = 7)]
+        [StringLength(100, ErrorMessage = "O Campo {0} pode ter no máximo {1} e minimo {2} caracteres", MinimumLength = 5)]
         [Index("UserNameIndex", IsUnique = true)]
         
         public string UserName { get; set; }

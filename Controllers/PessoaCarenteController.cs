@@ -245,7 +245,7 @@ namespace ProjetoBetaAutenticacao.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin, Voluntario_N1")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult ExcluirPessoa(int pessoaId)
         {

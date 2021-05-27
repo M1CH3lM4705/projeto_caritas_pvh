@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using ProjetoBetaAutenticacao.Utilidades;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoBetaAutenticacao
@@ -7,7 +8,8 @@ namespace ProjetoBetaAutenticacao
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
+            filters.Add(new MyHandleErrorAttribute());
         }
     }
 }

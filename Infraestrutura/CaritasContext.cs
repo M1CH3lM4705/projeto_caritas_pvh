@@ -2,6 +2,7 @@
 using ProjetoBetaAutenticacao.Models;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity.Validation;
 
 namespace ProjetoBetaAutenticacao.Infraestrutura
 {
@@ -16,6 +17,21 @@ namespace ProjetoBetaAutenticacao.Infraestrutura
         {
             base.Dispose(disposing);
         }
+
+        //public override int SaveChanges()
+        //{
+        //    try
+        //    {
+        //        return base.SaveChanges();
+        //    }
+        //    catch (DbEntityValidationException e)
+        //    {
+
+        //        var newException = new FormattedDbEntityValidationException(e);
+        //        throw newException;
+        //    }
+            
+        //}
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
